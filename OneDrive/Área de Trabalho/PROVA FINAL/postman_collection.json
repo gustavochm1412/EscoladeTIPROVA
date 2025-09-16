@@ -1,0 +1,330 @@
+{
+  "info": {
+    "name": "CRUD Computadores e Periféricos",
+    "description": "Coleção de requisições para o sistema CRUD de computadores e periféricos",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "1.0.0"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Computadores",
+      "item": [
+        {
+          "name": "Listar todos os computadores",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/computadores",
+              "host": ["{{baseUrl}}"],
+              "path": ["computadores"]
+            },
+            "description": "Retorna todos os computadores com seus periféricos"
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar computador por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/computadores/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["computadores", "1"]
+            },
+            "description": "Retorna um computador específico com seus periféricos"
+          },
+          "response": []
+        },
+        {
+          "name": "Criar computador (sem periféricos)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"PC Gamer Pro\",\n  \"cor\": \"Preto\",\n  \"dataFabricacao\": 2024\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/computadores",
+              "host": ["{{baseUrl}}"],
+              "path": ["computadores"]
+            },
+            "description": "Cria um novo computador sem periféricos"
+          },
+          "response": []
+        },
+        {
+          "name": "Criar computador com periféricos",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Workstation Dell\",\n  \"cor\": \"Prata\",\n  \"dataFabricacao\": 2023,\n  \"perifericos\": [\n    {\n      \"nome\": \"Mouse Óptico\"\n    },\n    {\n      \"nome\": \"Teclado USB\"\n    },\n    {\n      \"nome\": \"Monitor 24\\\" Full HD\"\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/computadores",
+              "host": ["{{baseUrl}}"],
+              "path": ["computadores"]
+            },
+            "description": "Cria um novo computador com periféricos incluídos no payload"
+          },
+          "response": []
+        },
+        {
+          "name": "Atualizar computador",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"PC Gamer Pro Atualizado\",\n  \"cor\": \"Azul\",\n  \"dataFabricacao\": 2024\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/computadores/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["computadores", "1"]
+            },
+            "description": "Atualiza os dados de um computador existente"
+          },
+          "response": []
+        },
+        {
+          "name": "Deletar computador",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/computadores/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["computadores", "1"]
+            },
+            "description": "Remove um computador e todos os seus periféricos (CASCADE DELETE)"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Periféricos",
+      "item": [
+        {
+          "name": "Adicionar periférico ao computador",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Mouse Gamer RGB\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/computadores/1/perifericos",
+              "host": ["{{baseUrl}}"],
+              "path": ["computadores", "1", "perifericos"]
+            },
+            "description": "Adiciona um novo periférico a um computador existente"
+          },
+          "response": []
+        },
+        {
+          "name": "Atualizar periférico",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Mouse Gamer RGB Pro\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/computadores/1/perifericos/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["computadores", "1", "perifericos", "1"]
+            },
+            "description": "Atualiza os dados de um periférico específico"
+          },
+          "response": []
+        },
+        {
+          "name": "Remover periférico",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/computadores/1/perifericos/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["computadores", "1", "perifericos", "1"]
+            },
+            "description": "Remove um periférico específico de um computador"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Exemplos de Validação",
+      "item": [
+        {
+          "name": "Erro - Computador sem nome",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cor\": \"Preto\",\n  \"dataFabricacao\": 2024\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/computadores",
+              "host": ["{{baseUrl}}"],
+              "path": ["computadores"]
+            },
+            "description": "Exemplo de erro de validação - nome obrigatório"
+          },
+          "response": []
+        },
+        {
+          "name": "Erro - Computador sem cor",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"PC Teste\",\n  \"dataFabricacao\": 2024\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/computadores",
+              "host": ["{{baseUrl}}"],
+              "path": ["computadores"]
+            },
+            "description": "Exemplo de erro de validação - cor obrigatória"
+          },
+          "response": []
+        },
+        {
+          "name": "Erro - Computador sem data de fabricação",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"PC Teste\",\n  \"cor\": \"Preto\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/computadores",
+              "host": ["{{baseUrl}}"],
+              "path": ["computadores"]
+            },
+            "description": "Exemplo de erro de validação - data de fabricação obrigatória"
+          },
+          "response": []
+        },
+        {
+          "name": "Erro - Periférico sem nome",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/computadores/1/perifericos",
+              "host": ["{{baseUrl}}"],
+              "path": ["computadores", "1", "perifericos"]
+            },
+            "description": "Exemplo de erro de validação - nome do periférico obrigatório"
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Log da requisição",
+          "console.log('Executando:', pm.request.method, pm.request.url);"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Testes básicos de resposta",
+          "pm.test('Status code is successful', function () {",
+          "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+          "});",
+          "",
+          "pm.test('Response time is less than 2000ms', function () {",
+          "    pm.expect(pm.response.responseTime).to.be.below(2000);",
+          "});",
+          "",
+          "// Log da resposta",
+          "console.log('Resposta:', pm.response.code, pm.response.status);",
+          "if (pm.response.text()) {",
+          "    console.log('Body:', pm.response.text());",
+          "}"
+        ]
+      }
+    }
+  ]
+}
+
